@@ -17,50 +17,66 @@ function draw() {
 //predefine circle attributes 
 
 //let angle = 0; 
+// Assignment 2 - It's About Time / Part C - Abstract Clock
+// Eye Of The Time - Hakan Yorganci
+
+let ms;
+let sec;
+let min;
+let hr;
+let core;
+
+function preload() {
+  core = loadImage("../hknyrgnc/p5_images/core.png");
+}
+  
 function setup() {
-	createCanvas(600,600); // make an HTML canvas element width x height pixels
-	angleMode(DEGREES); 
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES); // https://p5js.org/reference/#/p5/angleMode
 }
 
 function draw() {
-	background('black');
-	
-	translate(300,300); 
-	rotate(-90);
-	//rotate(angle); 
-	
-	let hr = hour();
-	let min = minute(); 
-	let sec = second(); 
-	
-	
-	//second circle 
-	strokeWeight(8);
-	
-	noFill(); 
-	stroke('gray');
-	ellipse(100, 0 , 200/3, 200/3,0);
-	stroke('yellow');
-	arc(100, 0 , 200/3, 200/3,0,  map(sec, 0, 60, 0, 360));
+  background('black');
+  noFill();
+  strokeWeight(5);
+  image(core, windowWidth/2.14, windowHeight/2.23, 65, 65);
 
+  // Creating the frame (eye shape) of my abstract clock
+  stroke('#ccff00');
+  ellipse(windowWidth/2, windowHeight/2, 175, 175);
+  stroke('#736AFF');
+  ellipse(windowWidth/2, windowHeight/2, 200, 200);
+  stroke('#daa520');
+  ellipse(windowWidth/2, windowHeight/2, 225, 200);
+  stroke('#F52887');
+  ellipse(windowWidth/2, windowHeight/2, 250, 200);
+  stroke('#ffff00');
+  ellipse(windowWidth/2, windowHeight/2, 275, 200);
+  stroke('#00ff00');
+  ellipse(windowWidth/2, windowHeight/2, 300, 200);
+  stroke('#9E7BFF');
+  ellipse(windowWidth/2, windowHeight/2, 325, 200);
 
-	//minute circle 
-	strokeWeight(8);
-	noFill(); 
-	stroke('gray')
-	ellipse(-100, 150 , 2*200/3, 2*200/3,0);
-	stroke('blue');
-	arc(-100, 150 , 2*200/3, 2*200/3, 0, map(min, 0, 60, 0, 360));
+// Creating the abstract clock's core
+// Second
+  strokeWeight(8);
+  stroke('#00ff7f');
+  //https://p5js.org/reference/#/p5/arc
+  arc(windowWidth/2, windowHeight/2, 100, 100, 0 - 90, sec - 90); // 90 deg starting point for all
+  sec = map(second(), 1, 60, 1, 360); //https://p5js.org/reference/#/p5/map
 
-	
-	//hour circle
- 	strokeWeight(8); 
-	noFill(); 
-	stroke('gray')
-	ellipse(-100, -150 , 200, 200,0);
-	stroke('red');
-	arc(-100, -150 , 200, 200,0, map(hr%12, 0, 12, 0, 360) );
-	//angle = angle +1; 
-	
-	
+  // Millisecond
+  stroke('#ff00ff');
+  arc(windowWidth/2, windowHeight/2, 75, 75, 0 - 90, ms - 90);
+  ms = map(millis(), 1, 12, 1, TWO_PI)-HALF_PI;
+  
+  // Minute
+  stroke('#3399ff');
+  arc(windowWidth/2, windowHeight/2, 125, 125, 0 - 90, min - 90);
+  min = map(minute(), 1, 60, 1, 360);
+
+  // Hour
+  stroke('#ffff00');
+  arc(windowWidth/2, windowHeight/2, 150, 150, 0 - 90, hr - 90);
+  hr = map(hour(), 1, 12, 1, 360);
 }
