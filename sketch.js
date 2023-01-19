@@ -3,7 +3,7 @@ function setup() {
 }
 
 function draw() {
-	background(225);
+	background('black');
 	textSize(32);
 	fill(180);
 	text(hour(), 10, 30);
